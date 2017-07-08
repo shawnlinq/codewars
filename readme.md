@@ -62,19 +62,19 @@ def remove_smallest(numbers):
     raise NotImplementedError("TODO: remove_smallest")
 ```
 
-> # The museum of incredible dull things
+> **The museum of incredible dull things**
 >
 > The museum of incredible dull things wants to get rid of some exhibitions. Miriam, the interior architect, comes up with a plan to remove the most boring exhibitions. She gives them a rating, and then removes the one with the lowest rating.
 >
 > However, just as she finished rating all exhibitions, she's off to an important fair, so she asks you to write a program that tells her the ratings of the items after one removed the lowest one. Fair enough.
 >
-> # Task
+> **Task**
 >
 > Given an array of integers, remove the smallest value. Do not mutate the original array/list. If there are multiple elements with the same value, remove the one with a lower index. If you get an empty array/list, return an empty array/list.
 >
 > Don't change the order of the elements that are left.
 >
-> ### Examples
+> **Examples**
 >
 > ```
 > remove_smallest([1,2,3,4,5]) = [2,3,4,5]
@@ -266,5 +266,57 @@ def sum_dig_pow(a, b): # range(a, b + 1) will be studied by the function
 > sum_dig_pow(90, 100) == []
 > ```
 
+### 13. Peter, the baker
+
+```python
+def cakes(recipe, available):
+    return min([available.get(x,0)//y for x,y in recipe.items()])
+```
 
 
+
+> Pete likes to bake some cakes. He has some recipes and ingredients. Unfortunately he is not good in maths. Can you help him to find out, how many cakes he could bake considering his recipes?
+>
+> Write a function `cakes()`, which takes the recipe (object) and the available ingredients (also an object) and returns the maximum number of cakes Pete can bake (integer). For simplicity there are no units for the amounts (e.g. 1 lb of flour or 200 g of sugar are simply 1 or 200). Ingredients that are not present in the objects, can be considered as 0.
+>
+> Examples:
+>
+> ```
+> # must return 2
+> cakes({flour: 500, sugar: 200, eggs: 1}, {flour: 1200, sugar: 1200, eggs: 5, milk: 200})
+> # must return 0
+> cakes({apples: 3, flour: 300, sugar: 150, milk: 100, oil: 100}, {sugar: 500, flour: 2000, milk: 2000})
+> ```
+
+### 14. Is a number prime?
+
+```python
+def is_prime(num):
+    if num <2:
+        return False
+    else:
+        for i in range(2,num):
+            if num%i ==0:
+                return False
+        else:
+            return True
+```
+
+> # Is Prime
+>
+> Define a function `isPrime` that takes one integer argument and returns `true` or `false` depending on if the integer is a prime.
+>
+> Per Wikipedia, a prime number (or a prime) is a natural number greater than 1 that has no positive divisors other than 1 and itself.
+>
+> ## Example
+>
+> ```
+> isPrime(5)
+> => true
+>
+> ```
+>
+> ## Assumptions
+>
+> - You can assume you will be given an integer input.
+> - You can not assume that the integer will be only positive. You may be given negative numbers.
