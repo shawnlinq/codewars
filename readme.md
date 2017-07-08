@@ -123,7 +123,73 @@ def Descending_Order(num):
 >
 > Input: `1254859723` Output: `9875543221`
 
-### 7.
+### 7.Sum of the first nth term of Series
+
+```python
+def series_sum(n):
+    return "%.2f" % sum([1/(i*3+1) for i in range(n)])
+```
+
+> **Task:**
+>
+> Your task is to write a function which returns the sum of following series upto nth term(parameter).
+>
+> ```
+> Series: 1 + 1/4 + 1/7 + 1/10 + 1/13 + 1/16 +...
+> ```
+>
+> **Rules:**
+>
+> - You need to round the answer up to 2 decimal places and return it as String.
+> - If the given value is 0 then it should return 0.00
+> - You will only be given Natural Numbers as arguments.
+>
+> **Examples:**
+>
+> ```
+> SeriesSum(1) => 1 = "1"
+> SeriesSum(2) => 1 + 1/4 = "1.25"
+> SeriesSum(5) => 1 + 1/4 + 1/7 + 1/10 + 1/13 = "1.57"
+> ```
+>
+> **NOTE**: In PHP the function is called `series_sum()`.
+
+### 8. Breaking chocolate problem
+
+```python
+def breakChocolate(n, m):
+    return n*m-1 if n>0 and m>0 else 0
+```
+
+> Your task is to split the chocolate bar of given dimension `n` x `m` into small squares. Each square is of size 1x1 and unbreakable. Implement a function that will return minimum number of breaks needed.
+>
+> For example if you are given a chocolate bar of size `2` x `1` you can split it to single squares in just one break, but for size `3` x `1` you must do two breaks.
+>
+> If input data is invalid you should return 0 (as in no breaks are needed if we do not have any chocolate to split). Input will always be a non-negative integer.
+
+### 9. Human Readable Time
+
+```python
+def make_readable(seconds):
+    # Do something
+    hours = seconds//3600
+    rests = seconds % 3600
+    mins = rests // 60
+    secs = rests % 60
+    return "{}:{}:{}".format(str(hours).rjust(2,"0"), str(mins).rjust(2,"0"), str(secs).rjust(2,"0"))
+```
+
+> Write a function, which takes a non-negative integer (seconds) as input and returns the time in a human-readable format (`HH:MM:SS`)
+>
+> - `HH` = hours, padded to 2 digits, range: 00 - 99
+> - `MM` = minutes, padded to 2 digits, range: 00 - 59
+> - `SS` = seconds, padded to 2 digits, range: 00 - 59
+>
+> The maximum time never exceeds 359999 (`99:59:59`)
+>
+> You can find some examples in the test fixtures.
+
+### 10. 
 
 
 
