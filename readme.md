@@ -1,5 +1,36 @@
 # The records of codewars using python
 
+### 16. Regex Password Validation
+
+```python
+regex="^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])[a-zA-Z0-9]{6,}$"
+```
+
+**or**
+
+```python
+from re import compile, VERBOSE
+
+regex = compile("""
+^              # begin word
+(?=.*?[a-z])   # at least one lowercase letter
+(?=.*?[A-Z])   # at least one uppercase letter
+(?=.*?[0-9])   # at least one number
+[A-Za-z\d]     # only alphanumeric
+{6,}           # at least 6 characters long
+$              # end word
+""", VERBOSE)
+```
+
+> You need to write regex that will validate a password to make sure it meets the following criteria:
+>
+> - At least six characters long
+> - contains a lowercase letter
+> - contains an uppercase letter
+> - contains a number
+>
+> Valid passwords will only be alphanumeric characters.
+
 ### 1. Multiply
 
 ```python
@@ -319,3 +350,33 @@ def is_prime(num):
 >
 > - You can assume you will be given an integer input.
 > - You can not assume that the integer will be only positive. You may be given negative numbers.
+
+### 15. Next bigger number with the same digits
+
+```python
+def next_bigger(n):
+    for i in range(len(str(n))-1):
+        if str(n)[i] < str(n)[i+1] and int(str(n)[i])*int(str(n)[i+1]) != 0:
+            m = list(str(n))
+            m[i+1], m[i] = m[i], m[i+1]
+            return int("".join(m))
+    else:
+        return -1
+```
+
+> You have to create a function that takes a positive integer number and returns the next bigger number formed by the same digits:
+>
+> ```
+> next_bigger(12)==21
+> next_bigger(513)==531
+> next_bigger(2017)==2071
+>
+> ```
+>
+> If no bigger number can be composed using those digits, return -1:
+>
+> ```
+> next_bigger(9)==-1
+> next_bigger(111)==-1
+> next_bigger(531)==-1
+> ```
