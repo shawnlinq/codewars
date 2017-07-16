@@ -1,5 +1,85 @@
 # The records of codewars using python
 
+### 23. First non-repeating letter 
+
+```python
+def first_non_repeating_letter(string):
+    str_lower = string.lower()
+    for i, j in enumerate(str_lower):
+        if str_lower.count(j) == 1:
+            return string[i]
+            
+    return ""
+```
+
+> Write a function named `firstNonRepeatingCharacter` that takes a string input, and returns the first character that is not repeated anywhere in the string.
+>
+> For example, if given the input `'stress'`, the function should return `'t'`, since the letter *t* only occurs once in the string, and occurs first in the string.
+>
+> As an added challenge, upper- and lowercase letters are considered the **same character**, but the function should return the correct case for the initial letter. For example, the input`'sTreSS'` should return `'T'`.
+>
+> If a string contains *all repeating characters*, it should return the empty string (`""`).
+
+### 22. Twice linear
+
+**my solutions(time out when n is large):**
+
+```python
+def dbl_linear(n):
+    u = set([1])
+    for i in range(n):
+        x = min(u)
+        u.update([x*2 + 1, x*3 +1])
+        u.remove(x)
+    return min(u)
+```
+
+**or**
+
+```python
+def dbl_linear(n):
+    u = [1]
+    for i in range(n):
+        u.append(u[0]*2 +1)
+        u.append(u[0]*3 +1)
+        del u[0]
+        u.sort()
+    return u[0]
+```
+
+**the author's solution:**
+
+```python
+from collections import deque
+def dbl_linear(n):
+    h = 1; cnt = 0; q2, q3 = deque([]), deque([])
+    while True:
+        if (cnt >= n):
+            return h
+        q2.append(2 * h + 1)
+        q3.append(3 * h + 1)
+        h = min(q2[0], q3[0])
+        if h == q2[0]: h = q2.popleft()
+        if h == q3[0]: h = q3.popleft()
+        cnt += 1
+```
+
+> Consider a sequence `u` where u is defined as follows:
+>
+> 1. The number `u(0) = 1` is the first one in `u`.
+> 2. For each `x` in `u`, then `y = 2 * x + 1` and `z = 3 * x + 1` must be in `u` too.
+> 3. There are no other numbers in `u`.
+>
+> Ex: `u = [1, 3, 4, 7, 9, 10, 13, 15, 19, 21, 22, 27, ...]`
+>
+> 1 gives 3 and 4, then 3 gives 7 and 10, 4 gives 9 and 13, then 7 gives 15 and 22 and so on...
+>
+> \#Task: Given parameter `n` the function `dbl_linear` (or dblLinear...) returns the element `u(n)` of the ordered (with <) sequence `u`.
+>
+> \#Example: `dbl_linear(10) should return 22`
+>
+> \#Note: Focus attention on efficiency
+
 ### 21.Valid Braces 
 
 ```python
