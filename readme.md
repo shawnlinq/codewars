@@ -1,5 +1,154 @@
 # The records of codewars using python
 
+### 25. Complementary DNA
+
+```python
+pairs = {'A':'T','T':'A','C':'G','G':'C'}
+def DNA_strand(dna):
+    return ''.join([pairs[x] for x in dna])
+```
+
+> Deoxyribonucleic acid (DNA) is a chemical found in the nucleus of cells and carries the "instructions" for the development and functioning of living organisms.
+>
+> If you want to know more [http://en.wikipedia.org/wiki/DNA](http://en.wikipedia.org/wiki/DNA)
+>
+> In DNA strings, symbols "A" and "T" are complements of each other, as "C" and "G". You have function with one side of the DNA (string, except for Haskell); you need to get the other complementary side. DNA strand is never empty or there is no DNA at all (again, except for Haskell).
+>
+> ```
+> DNA_strand ("ATTGC") # return "TAACG"
+> DNA_strand ("GTAT") # return "CATA"
+> ```
+
+### 24. Make a spiral
+
+```python
+def spiralize(size):
+    spiral = [[0 for i in range(size)] for j in range(size)]
+    if size == 1:
+        return [[1]]
+    if size == 0:
+        return []
+    for n in range(size):
+        spiral[0][n] = 1
+        spiral[size-1][n] =1
+        spiral[n][size-1] =1
+        spiral[n][0] = 1
+    spiral[1][0] = 0
+    if size < 5:
+        return spiral
+    spiral[2][1] = 1
+    x, y = 2, 1
+    while True:
+        if spiral[x][y-1] == 1:
+            if spiral[x][y+2] == 0:
+                spiral[x][y+1] =1
+                y += 1
+            else:
+                if spiral[x+2][y] ==0:
+                    spiral[x+1][y] = 1
+                    x += 1
+                    if spiral[x+2][y] == 1:
+                        break
+                else:
+                    break
+        elif spiral[x-1][y] == 1:
+            if spiral[x+2][y] == 0:
+                spiral[x+1][y] = 1
+                x += 1
+            else:
+                if spiral[x][y-2] == 0:
+                    spiral[x][y-1] =1
+                    y -= 1
+                    if spiral[x][y-2] == 1:
+                        break
+                else:
+                    break
+        elif spiral[x][y+1] == 1:
+            if spiral[x][y-2] == 0:
+                spiral[x][y-1] = 1
+                y-= 1
+            else:
+                if spiral[x-2][y] == 0:
+                    spiral[x-1][y] =1
+                    x -= 1
+                    if spiral[x-2][y] ==1:
+                        break
+                else:
+                    break
+        elif spiral[x+1][y] == 1:
+            if spiral[x-2][y] == 0:
+                spiral[x-1][y] = 1
+                x -= 1
+            else:
+                if spiral[x][y+2] == 0:
+                    spiral[x][y+1] =1
+                    y += 1
+                    if spiral[x][y+2] ==1:
+                        break
+                else:
+                    break
+
+    return spira
+```
+
+**more clever solution:**
+
+```python
+def spiralize(size):
+    spiral = [[1]*size for _ in xrange(size)]
+    def ok(y, x):
+        return y < size and x < size and y >= 0 and x >= 0 and spiral[y][x]
+    y, x, dy, dx = 1, -1, 0, 1
+    while ok(y + dy, x + dx):
+        if ok(y + 2*dy, x + 2*dx):
+            y += dy
+            x += dx
+        else:
+            dx, dy = dy*(2*dx-1), dx
+        spiral[y][x] = 0
+    return spiral
+```
+
+
+
+> Your task, is to create a NxN spiral with a given `size`.
+>
+> For example, spiral with size 5 should look like this:
+>
+> ```
+> 00000
+> ....0
+> 000.0
+> 0...0
+> 00000
+> ```
+>
+> and with the size 10:
+>
+> ```
+> 0000000000
+> .........0
+> 00000000.0
+> 0......0.0
+> 0.0000.0.0
+> 0.0..0.0.0
+> 0.0....0.0
+> 0.000000.0
+> 0........0
+> 0000000000
+> ```
+>
+> Return value should contain array of arrays, of `0` and `1`, for example for given size `5` result should be:
+>
+> ```
+> [[1,1,1,1,1],[0,0,0,0,1],[1,1,1,0,1],[1,0,0,0,1],[1,1,1,1,1]]
+>
+> ```
+>
+> Because of the edge-cases for tiny spirals, the size will be at least 5.
+>
+> General rule-of-a-thumb is, that the snake made with '1' cannot touch to itself.
+
 ### 23. First non-repeating letter 
 
 ```python
