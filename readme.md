@@ -1,5 +1,221 @@
 # The records of codewars using python
 
+### 29. Decode the Morse code
+
+```python
+def decodeMorse(morseCode):
+    list1 = [MORSE_CODE[y] for y in (x.split() for x in morseCode.split("   ")) if y]
+    return " ".join([''.join(i) for i in list1])
+```
+
+> This kata is part of a series on the Morse code. After you solve this kata, you may move to the [next one](https://www.codewars.com/kata/decode-the-morse-code-advanced).
+>
+> In this kata you have to write a simple 
+>
+> Morse code
+>
+>  decoder. While the Morse code is now mostly superceded by voice and digital data communication channels, it still has its use in some applications around the world.
+>
+> The Morse code encodes every character as a sequence of "dots" and "dashes". For example, the letter `A` is coded as `·−`, letter `Q` is coded as `−−·−`, and digit `1` is coded as `·−−−`. The Morse code is case-insensitive, traditionally capital letters are used. When the message is written in Morse code, a single space is used to separate the character codes and 3 spaces are used to separate words. For example, the message `HEY JUDE`in Morse code is `···· · −·−−   ·−−− ··− −·· ·`.
+>
+> **NOTE:** Extra spaces before or after the code have no meaning and should be ignored.
+>
+> In addition to letters, digits and some punctuation, there are some special service codes, the most notorious of those is the international distress signal [SOS](https://en.wikipedia.org/wiki/SOS) (that was first issued by [Titanic](https://en.wikipedia.org/wiki/RMS_Titanic)), that is coded as `···−−−···`. These special codes are treated as single special characters, and usually are transmitted as separate words.
+>
+> Your task is to implement a function `decodeMorse(morseCode)`, that would take the morse code as input and return a decoded human-readable string.
+>
+> For example:
+>
+> ```
+> decodeMorse('.... . -.--   .--- ..- -.. .')
+> #should return "HEY JUDE"
+>
+> ```
+>
+> The Morse code table is preloaded for you as a dictionary, feel free to use it. In CoffeeScript, C++, JavaScript, PHP, Python, Ruby and TypeScript, the table can be accessed like this: `MORSE_CODE['.--']`, in Java it is`MorseCode.get('.--')`, in C# it is `MorseCode.Get('.--')`, in Haskell the codes are in a `Map String String` and can be accessed like this:`morseCodes ! ".--"`, in Elixir it is `morse_codes` variable.
+>
+> All the test strings would contain valid Morse code, so you may skip checking for errors and exceptions. In C#, tests will fail if the solution code throws an exception, please keep that in mind. This is mostly because otherwise the engine would simply ignore the tests, resulting in a "valid" solution.
+>
+> Good luck!
+>
+> After you complete this kata, you may try yourself at [Decode the Morse code, advanced](http://www.codewars.com/kata/decode-the-morse-code-advanced).
+
+### 28. Smallest possible sum 
+
+```python
+def solution(a):
+    if len(a) == 1:
+        return a[0]
+    while 1:
+        a.sort()
+        if a[-1] == a[0]:
+            return a[0]*len(a)
+        if a[0] == 1:
+            return len(a)
+        for i,j in enumerate(a):
+            y = j % a[0]
+            if y != 0:
+                a[i] = y
+            else:
+                a[i] = a[0]
+```
+
+**more clever:**
+
+```python
+def solution(a):
+    while 1:
+        a.sort()
+        if a[-1] == a[0]:
+            return a[0]*len(a)
+        a = [[a[0],x%a[0]][bool(x%a[0])] for x in a]
+```
+
+
+
+> 
+>
+> ## Description
+>
+> Given an array X of positive integers, its elements are to be transformed by running the following operation on them as many times as required:
+>
+> `if X[i] > X[j] then X[i] = X[i] - X[j]`
+>
+> When no more transformations are possible, return its sum ("smallest possible sum").
+>
+> For instance, the successive transformation of the elements of input X = [6, 9, 21] is detailed below:
+>
+> ```
+> X_1 = [6, 9, 12] # -> X_1[2] = X[2] - X[1] = 21 - 9
+> X_2 = [6, 9, 6]  # -> X_2[2] = X_1[2] - X_1[0] = 12 - 6
+> X_3 = [6, 3, 6]  # -> X_3[1] = X_2[1] - X_2[0] = 9 - 6
+> X_4 = [6, 3, 3]  # -> X_4[2] = X_3[2] - X_3[1] = 6 - 3
+> X_5 = [3, 3, 3]  # -> X_5[1] = X_4[0] - X_4[1] = 6 - 3
+>
+> ```
+>
+> The returning output is the sum of the final transformation (here 9).
+>
+> ## Input/Output
+>
+> - `[input]` an array `a`
+> - `0 < a[i] < 52000` (except one test)
+> - `0 ≤ len(a) ≤ 170`
+> - `[output]` an integer
+>
+> ## Example
+>
+> ```
+> solution([6, 9, 21]) #-> 9
+>
+> ```
+>
+> ## Solution steps:
+>
+> ```
+> [6, 9, 12] #-> X[2] = 21 - 9
+> [6, 9, 6] #-> X[2] = 12 - 6
+> [6, 3, 6] #-> X[1] = 9 - 6
+> [6, 3, 3] #-> X[2] = 6 - 3
+> [3, 3, 3] #-> X[1] = 6 - 3
+> ```
+
+### 27. Design a Simple Automaton (Finite State Machine)
+
+```python
+class Automaton(object):
+
+    def __init__(self):
+        self.states = []
+
+    def read_commands(self, commands):
+        # Return True if we end in our accept state, False otherwise
+        qn = 1
+        for i in commands:
+            if qn ==1:
+                if i == "1":
+                    qn +=1
+                continue    
+            elif qn ==2:
+                if i == "0":
+                    qn += 1
+                continue
+            else:
+                qn -= 1
+                continue
+        if qn == 2:
+            return True
+        else:
+            return False
+
+my_automaton = Automaton()
+```
+
+> Create a finite automaton that has three states. Finite automatons are the same as finite state machines for our purposes.
+>
+> Our simple automaton, accepts the language of A, defined as {0, 1} and should have three states,
+> q1, q2, and q3.
+>
+> q1 is our start state. We begin reading commands from here.
+> q2 is our accept state. We return true if this is our last state.
+>
+> q1 moves to q2 when given a 1, and stays at q1 when given a 0.
+> q2 moves to q3 when given a 0, and stays at q2 when given a 1.
+> q3 moves to q2 when given a 0 or 1.
+>
+> Our automaton should return whether we end in our accepted state, or not (true/false.)
+>
+> Here's an example.
+>
+> ```
+> a = Automaton()
+> # Do anything you need to set up this automaton's states.
+> is_accepted = a.read_commands(["1", "0", "0", "1", "0"])
+>
+> ```
+>
+> We make these transitions based on the input of `["1", "0", "0", "1", "0"]`,
+>
+> ```
+> 1 q1 -> q2
+> 0 q2 -> q3
+> 0 q3 -> q2
+> 1 q2 -> q2
+> 0 q2 -> q3
+>
+> ```
+>
+> We end in q3, which is not our accept state, so return false.
+>
+> The input of `["1", "0", "0", "1", "0"]` would cause us to return false, as we would end in q3.
+>
+> I have started you off with the bare bones of the Automaton object.
+>
+> ```
+> class Automaton(object):
+>
+>     def __init__(self):
+>         self.states = []
+>
+>     def read_commands(self, commands):
+>         # Return True if we end in our accept state, False otherwise
+>
+> my_automaton = Automaton()
+>
+> # Do anything necessary to set up your automaton's states, q1, q2, and q3.
+>
+> ```
+>
+> You will have to design your state objects, and how your Automaton handles transitions. Also make sure you set up the three states, q1, q2, and q3, for the myAutomaton instance. The test fixtures will be calling against myAutomaton.
+>
+> As an aside, the automaton accepts an array of strings, rather than just numbers, or a number represented as a string, because the language an automaton can accept isn't confined to just numbers. An automaton should be able to accept any 'symbol.'
+>
+> Here are some resources on DFAs (the automaton this Kata asks you to create.)
+>
+> [http://www.cs.odu.edu/~toida/nerzic/390teched/regular/fa/dfa-definitions.html](http://www.cs.odu.edu/~toida/nerzic/390teched/regular/fa/dfa-definitions.html)
+> [http://en.wikipedia.org/wiki/Deterministic_finite_automaton](http://en.wikipedia.org/wiki/Deterministic_finite_automaton)
+> [http://www.cse.chalmers.se/~coquand/AUTOMATA/o2.pdf](http://www.cse.chalmers.se/~coquand/AUTOMATA/o2.pdf)
+
 ### 26. Directions Reduction
 ```python
 def dirReduc(arr):
