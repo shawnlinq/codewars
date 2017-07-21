@@ -1,11 +1,122 @@
 # The records of codewars using python
 
+### 32. Next bigger number with the same digits 
+
+```python
+def next_bigger(n):
+    arr = list(str(n))
+    max_n = int("".join(sorted(arr, reverse=True)))
+    sorted_n = sorted(arr)
+    m = n
+    while m <= max_n:
+        m += 1
+        if sorted(list(str(m))) == sorted_n:
+            return m
+    return -1
+```
+
+> You have to create a function that takes a positive integer number and returns the next bigger number formed by the same digits:
+>
+> ```
+> next_bigger(12)==21
+> next_bigger(513)==531
+> next_bigger(2017)==2071
+>
+> ```
+>
+> If no bigger number can be composed using those digits, return -1:
+>
+> ```
+> next_bigger(9)==-1
+> next_bigger(111)==-1
+> next_bigger(531)==-1
+> ```
+
+### 31. Weight for weight
+
+```python
+def order_weight(string):
+    list1 = string.split()
+    list1.sort()
+    list2 = sorted(list1, key = lambda x:sum([int(i) for i in list(x)]))
+    return " ".join(list2)
+```
+
+> My friend John and I are members of the "Fat to Fit Club (FFC)". John is worried because each month a list with the weights of members is published and each month he is the last on the list which means he is the heaviest.
+>
+> I am the one who establishes the list so I told him: "Don't worry any more, I will modify the order of the list". It was decided to attribute a "weight" to numbers. The weight of a number will be from now on the sum of its digits.
+>
+> For example `99` will have "weight" `18`, `100` will have "weight" `1` so in the list `100` will come before `99`. Given a string with the weights of FFC members in normal order can you give this string ordered by "weights" of these numbers?
+>
+> **Example:**
+>
+> `"56 65 74 100 99 68 86 180 90"` ordered by numbers weights becomes: `"100 180 90 56 65 74 68 86 99"`
+>
+> When two numbers have the same "weight", let us class them as if they were strings and not numbers: `100` is before `180` because its "weight" (1) is less than the one of `180` (9) and `180` is before `90` since, having the same "weight" (9) it comes before as a *string*.
+>
+> All numbers in the list are positive numbers and the list can be empty.
+
+### 30. Sum of Pairs 
+
+```python
+def sum_pairs(ints, s):
+    seen = set()
+    for n in ints:
+        t = s-n
+        if t not in seen:
+            seen.add(n)
+        else:
+            return [t, n]
+    return None
+```
+
+> Given a list of integers and a single sum value, return the first two values (parse from the left please) in order of appearance that add up to form the sum.
+>
+> ```
+> sum_pairs([11, 3, 7, 5],         10)
+> #              ^--^      3 + 7 = 10
+> == [3, 7]
+>
+> sum_pairs([4, 3, 2, 3, 4],         6)
+> #          ^-----^         4 + 2 = 6, indices: 0, 2 *
+> #             ^-----^      3 + 3 = 6, indices: 1, 3
+> #                ^-----^   2 + 4 = 6, indices: 2, 4
+> #  * entire pair is earlier, and therefore is the correct answer
+> == [4, 2]
+>
+> sum_pairs([0, 0, -2, 3], 2)
+> #  there are no pairs of values that can be added to produce 2.
+> == None/nil/undefined (Based on the language)
+>
+> sum_pairs([10, 5, 2, 3, 7, 5],         10)
+> #              ^-----------^   5 + 5 = 10, indices: 1, 5
+> #                    ^--^      3 + 7 = 10, indices: 3, 4 *
+> #  * entire pair is earlier, and therefore is the correct answer
+> == [3, 7]
+> ```
+>
+> Negative numbers and duplicate numbers can and will appear.
+>
+> **NOTE:** There will also be lists tested of lengths upwards of 10,000,000 elements. Be sure your code doesn't time out.
+
 ### 29. Decode the Morse code
 
 ```python
 def decodeMorse(morseCode):
-    list1 = [MORSE_CODE[y] for y in (x.split() for x in morseCode.split("   ")) if y]
-    return " ".join([''.join(i) for i in list1])
+    list1 = [x.split() for x in morseCode.split("   ")]
+    list2 = []
+    for i in list1:
+        for j in i:
+            if j:
+                list2.append(MORSE_CODE[j])
+        list2.append(" ")
+    list2.pop()
+    while 1:
+        if list2[0]==" ":
+            del list2[0]
+        else:
+            break
+    return "".join(list2)
 ```
 
 > This kata is part of a series on the Morse code. After you solve this kata, you may move to the [next one](https://www.codewars.com/kata/decode-the-morse-code-advanced).
