@@ -1,5 +1,79 @@
 # The records of codewars using python
 
+### 33. Snail 
+
+```python
+def snail(array):
+    size = len(array)
+    arr = []
+    y, x, dy, dx = 0, -1, 0, 1
+    def ok(y, x):
+        return y<size and x<size and y>=0 and x>=0 and array[y][x]!=[]
+    if not array[0]:
+        return arr
+    while 1:
+        if ok(y+dy, x+dx):
+            y += dy
+            x += dx
+            arr.append(array[y][x])
+            array[y][x] = []
+        else:
+            dx, dy = dy*(2*dx-1), dx
+            if not ok(y+dy, x+dx):
+                break
+    return arr
+```
+
+**more clever solutions:**
+
+```python
+def snail(array):
+    a = []
+    while array:
+        a.extend(list(array.pop(0)))
+        array = zip(*array)
+        array.reverse()
+    return a
+    
+```
+
+**or**:
+
+```python
+def snail(array):
+    return list(array[0]) + snail(zip(*array[1:])[::-1]) if array else []
+```
+
+> ## Snail Sort
+>
+> Given an `n x n` array, return the array elements arranged from outermost elements to the middle element, traveling clockwise.
+>
+> ```
+> array = [[1,2,3],
+>          [4,5,6],
+>          [7,8,9]]
+> snail(array) #=> [1,2,3,6,9,8,7,4,5]
+>
+> ```
+>
+> For better understanding, please follow the numbers of the next array consecutively:
+>
+> ```
+> array = [[1,2,3],
+>          [8,9,4],
+>          [7,6,5]]
+> snail(array) #=> [1,2,3,4,5,6,7,8,9]
+>
+> ```
+>
+> This image will illustrate things more clearly:
+>
+> ![img](http://www.haan.lu/files/2513/8347/2456/snail.png)
+>
+> NOTE: The idea is not sort the elements from the lowest value to the highest; the idea is to traverse the 2-d array in a clockwise snailshell pattern.
+>
+> NOTE 2: The 0x0 (empty matrix) is represented as `[[]]`
+
 ### 32. Next bigger number with the same digits 
 
 ```python
