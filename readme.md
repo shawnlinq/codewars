@@ -1,5 +1,18 @@
 # The records of codewars using python
 
+### 39. Parse float
+
+```python
+def parse_float(string):
+    try:
+        string = float(string)
+        return string
+    except:
+        return None
+```
+
+> Write function `parseFloat` (for Javascript `parseF`) which takes a string and returns a number or `Nothing` (for Python `None`, for Javascript `null`) if conversion is not possible.
+
 ### 38. Band name generator
 
 ```python
