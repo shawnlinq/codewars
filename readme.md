@@ -1,5 +1,76 @@
 # The records of codewars using python
 
+### 43. Primes in numbers
+
+```python
+def primeFactors(n):
+    num = 2
+    list_n = ""
+    while num<= n:
+        num_count = 0
+        while 1:
+            if n%num == 0:
+                num_count +=1
+                n /= num
+            else:
+                if num_count == 1:
+                    list_n +="({})".format(num)
+                elif num_count > 1:
+                    list_n +="({}**{})".format(num, num_count)
+                break
+        num += 1
+    return list_n
+```
+
+> Given a positive number n > 1 find the prime factor decomposition of n. The result will be a string with the following form :
+>
+> ```
+>  "(p1**n1)(p2**n2)...(pk**nk)"
+> ```
+>
+> with the p(i) in increasing order and n(i) empty if n(i) is 1.
+>
+> ```
+> Example: n = 86240 should return "(2**5)(5)(7**2)(11)"
+> ```
+
+### 42. Evil or Odious
+
+```python
+def evil(n):
+    return "It's Evil!" if bin(n).count("1")%2 == 0 else "It's Odious!"
+```
+
+> The number n is **Evil** if it has an even number of 1's in its binary expansion.
+> First ten: 3, 5, 6, 9, 10, 12, 15, 17, 18, 20
+> The number n is **Odious** if it has an odd number of 1's in its binary expansion.
+> First ten: 1, 2, 4, 7, 8, 11, 13, 14, 16, 19
+> You have to write a function that determine if a number is Evil of Odious, function should return "It's Evil!" in case of evil number and "It's Odious!" in case of odious number.
+>
+> good luck :)
+
+### 41. Counting Duplicates
+
+```python
+def duplicate_count(text):
+    text=[x.lower() for x in text]
+    return sum([1 for x in set(text) if text.count(x) > 1])
+```
+
+> ### Count the number of Duplicates
+>
+> Write a function that will return the count of *distinct* case-insensitive alphabetic characters and numeric digits that occur more than once in the input string. The input string can be assumed to contain only alphabets (both uppercase and lowercase) and numeric digits.
+>
+> ### Example
+>
+> "abcde" -> 0 `# no characters repeats more than once`
+> "aabbcde" -> 2 `# 'a' and 'b'`
+> "aabBcde" -> 2 `# 'a' occurs twice and 'b' twice (`b`and`B`)`
+> "indivisibility" -> 1 `# 'i' occurs six times`
+> "Indivisibilities" -> 2 `# 'i' occurs seven times and 's' occurs twice`
+> "aA11" -> 2 `# 'a' and '1'`
+> "ABBA" -> 2 `# 'A' and 'B' each occur twice`
+
 ### 40. String average
 
 ```python
