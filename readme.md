@@ -1,5 +1,54 @@
 # The records of codewars using python
 
+### 44. Binary String
+
+```python
+def bin_str(s):
+    pairs = {"1":"0", "0":"1"}
+    pin = "1"
+    num = 0
+    for x in s:
+        if x == pin:
+            num += 1
+            pin = pirs[pin]
+    return num
+```
+
+> You are given a binary string (a string consisting of only '1' and '0'). The only operation that can be performed on it is a Flip operation.
+>
+> It flips any binary character ( '0' to '1' and vice versa) and all characters to the `right` of it.
+>
+> For example, applying the Flip operation to the 4th character of string "1001010" produces the "1000101" string, since all characters from the 4th to the 7th are flipped.
+>
+> Your task is to find the minimum number of flips required to convert the binary string to string consisting of all '0'.
+>
+> **example**
+>
+> For `s = "0101"`, the output should be `3`.
+>
+> It's possible to convert the string in three steps:
+>
+> ```
+>  "0101" -> "0010"
+>     ^^^
+>  "0010" -> "0001"
+>      ^^
+>  "0001" -> "0000"
+>       ^
+>
+> ```
+>
+> **output/input**
+>
+> - `[input]` string `s`
+>
+>   A binary string.
+>
+>
+> - `[output]` an integer
+>
+>   The minimum number of flips required.
+
 ### 43. Primes in numbers
 
 ```python
